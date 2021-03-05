@@ -1,0 +1,197 @@
+{
+    "languageserver": {
+        "dockerfile":{
+            "command": "docker-langserver",
+            "filetypes": [
+                "dockerfile"
+            ],
+            "args": [
+                "--stdio"
+            ]
+        }
+    },
+    "jedi.enable": true,
+    "jedi.startupMessage": false,
+    "jedi.markupKindPreferred": "plaintext",
+    "jedi.trace.server": "off",
+    "jedi.jediSettings.autoImportModules": [],
+    "jedi.executable.command": "jedi-language-server",
+    "jedi.executable.args": [],
+    "jedi.completion.disableSnippets": false,
+    "jedi.diagnostics.enable": true,
+    "jedi.diagnostics.didOpen": true,
+    "jedi.diagnostics.didChange": true,
+    "jedi.diagnostics.didSave": true,
+    "jedi.workspace.extraPaths": [],
+    "diagnostic-languageserver.mergeConfig": true,
+    "diagnostic-languageserver.filetypes": {
+          "python": "flake8",
+          "vim": "vint",
+          "sh": "shellcheck",
+          "yaml": "yamllint"
+    },
+    "diagnostic-languageserver.linters": {
+        "flake8": {
+            "commmand": "flake8",
+            "debounce": 100,
+            "args": [
+                "--format=%(row)d,%(col)d,%(code).1s,%(code)s: %(text)s",
+                "-"
+            ],
+            "offsetLine": 0,
+            "offsetColumn": 0,
+            "sourceName": "flake8",
+            "formatLines": 1,
+            "formatPattern": [
+                "(\\d+),(\\d+),([A-Z]),(.*)(\\r|\\n)*$",
+                {
+                    "line": 1,
+                    "column": 2,
+                    "security": 3,
+                    "message": 4
+                }
+            ],
+            "securities": {
+                "W": "warning",
+                "E": "error",
+                "F": "error",
+                "C": "error",
+                "N": "error"
+            }
+        },
+        "pylint": {
+            "sourceName": "pylint",
+            "command": "pylint",
+            "args": [
+                "--output-format",
+                "text",
+                "--score",
+                "no",
+                "--msg-template",
+                "'{line}:{column}:{category}:{msg} ({msg_id}:{symbol})'",
+                "%file"
+            ],
+            "formatPattern": [
+                "^(\\d+?):(\\d+?):([a-z]+?):(.*)$",
+                {
+                    "line": 1,
+                    "column": 2,
+                    "security": 3,
+                    "message": 4
+                }
+            ],
+            "rootPatterns": [
+                ".git",
+                "pyproject.toml",
+                "setup.py"
+            ],
+            "securities": {
+                "informational": "hint",
+                "refactor": "info",
+                "convention": "info",
+                "warning": "warning",
+                "error": "error",
+                "fatal": "error"
+            },
+            "offsetColumn": 1,
+            "formatLines": 1
+        },
+        "shellcheck": {
+            "command": "shellcheck",
+            "debounce": 100,
+            "args": [
+                "--format",
+                "json",
+                "-"
+            ],
+            "sourceName": "shellcheck",
+            "parseJson": {
+                "line": "line",
+                "column": "column",
+                "endLine": "endLine",
+                "endColumn": "endColumn",
+                "message": "${message} [${code}]",
+                "security": "level"
+            },
+            "securities": {
+                "error": "error",
+                "warning": "warning",
+                "info": "info",
+                "style": "hint"
+            }
+        },
+        "vint": {
+            "command": "vint",
+            "debounce": 100,
+            "args": [
+                "--enable-neovim",
+                "-"
+            ],
+            "offsetLine": 0,
+            "offsetColumn": 0,
+            "sourceName": "vint",
+            "formatLines": 1,
+            "formatPattern": [
+                "[^:]+:(\\d+):(\\d+):\\s*(.*)(\\r|\\n)*$",
+                {
+                    "line": 1,
+                    "column": 2,
+                    "message": 3
+                }
+            ]
+        },
+        "yamllint": {
+            "args": [
+                "-f",
+                "parsable",
+                "-"
+            ],
+            "command": "yamllint",
+            "debounce": 100,
+            "formatLines": 1,
+            "formatPattern": [
+                "^.*?:(\\d+):(\\d+): \\[(.*?)] (.*) \\((.*)\\)",
+                {
+                    "line": 1,
+                    "endline": 1,
+                    "column": 2,
+                    "endColumn": 2,
+                    "message": 4,
+                    "code": 5,
+                    "security": 3
+                }
+            ],
+            "securities": {
+                "error": "error",
+                "warning": "warning"
+            },
+            "sourceName": "yamllint"
+        }
+    },
+    "diagnostic-languageserver.formatFiletypes": {
+          "python": ["black", "isort", "docformatter"],
+          "sh": "shellcheck"
+    },
+    "diagnostic-languageserver.formatters": {
+        "black": {
+            "command": "black",
+            "args": [
+                "-q",
+                "-"
+            ]
+        },
+        "isort": {
+            "command": "isort",
+            "args": [
+                "-q",
+                "-"
+            ]
+        },
+        "docformatter": {
+            "command": "docformatter",
+            "args": [
+                "-"
+            ]
+        }
+    }
+}
