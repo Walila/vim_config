@@ -1,0 +1,18 @@
+{
+    "configurations": {
+        "debug: Launch": {
+            "adapter": "debugpy",
+            "configuration": {
+                "name": "debug: Launch",
+                "type": "python",
+                "request": "launch",
+                "cwd": "${cwd}",
+                "python": "/usr/bin/python",
+                "stopOnEntry": false,
+                "console": "integratedTerminal",
+                "debugOptions": [],
+                "program": "${file}"
+            }
+        }
+    }
+}

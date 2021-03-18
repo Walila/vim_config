@@ -1,8 +1,14 @@
-plugged/*
+plugged/**
 # !plugged/vimspector/
 # plugged/vimspector/*
 # !plugged/vimspector/configurations/
 # plugged/vimspector/configurations/linux/*
 # !plugged/vimspector/configurations/linux/python/
+
+# !plugged/vimspector
+# !plugged/vimspector/configurations
+# !plugged/vimspector/configurations/linux
+# !plugged/vimspector/configurations/linux/python
 # !plugged/vimspector/configurations/linux/python/vimspector.python.json
 
+#\!plugged/**/vimspector.python.json
