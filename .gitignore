@@ -1,3 +1,6 @@
 plugged/*
-!plugged/vimspector/configurations/linux/python/vimspector.python.json
+!plugged/vimspector
+plugged/vimspector/*
+!plugged/vimspector/configurations
+# !plugged/vimspector/configurations/linux/python/vimspector.python.json
 
