@@ -1,5 +1,6 @@
 
-let mapleader = "z"
+"let mapleader = "z"
+let mapleader = "\<Space>"
 
 
 call plug#begin()
@@ -18,6 +19,9 @@ Plug 'puremourning/vimspector'
 Plug 'szw/vim-maximizer'
 Plug 'shmargum/vim-sass-colors'
 Plug 'vim-test/vim-test'
+
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'frazrepo/vim-rainbow'
 call plug#end()
 
 autocmd BufReadPre,BufNewFile * let b:did_vim_sass_colors = 1
@@ -84,7 +88,7 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
-nnoremap <space> za
+"nnoremap <space> za
 nmap <silent> <leader>n :bn<CR>
 nmap <silent> <leader>p :bp<CR>
 nmap <silent> <leader>w :bw<CR>
@@ -151,12 +155,13 @@ inoremap <silent> <C-s> <ESC>:w<CR>a
 let g:vimspector_enable_mappings = 'VISUAL_STUDIO'
 
 nnoremap <leader>, :MaximizerToggle!<CR>
-nnoremap <F3> :call vimspector#Reset()<CR>
+nnoremap <F4> :VimspectorReset<CR>
 tnoremap <s-Esc> <C-\><C-n>
-"if has('nvim')
-    "tnoremap <Esc> <C-\><C-n>
-    "tnoremap <C-v><Esc> <Esc>
-"endif
+nnoremap <leader>atw :call AddToWatch()<CR>
+func! AddToWatch()
+    let word = expand("<cexpr>")
+    call vimspector#AddWatch(word)
+endfunction
 
 au BufNewFile,BufRead *.py
     \ set tabstop=4 |
@@ -192,7 +197,7 @@ endfunction
 let test#neovim#term_position = "topleft"
 let test#neovim#term_position = "vert"
 let test#neovim#term_position = "vert botright 30"
-let test#python#runner = 'pytest' 
+let test#python#runner = 'pytest'
 nmap <silent> <leader>tn :TestNearest<CR>
 nmap <silent> <leader>tf :TestFile<CR>
 nmap <silent> <leader>ts :TestSuite<CR>
@@ -206,3 +211,12 @@ nnoremap <silent> <leader>l :vertical resize -5<CR>
 
 "set statusline^=%{coc#status()}%{get(b:,'coc_current_function',''
 "nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
+
+let g:better_whitespace_enable=1
+let g:strip_whitespace_on_save=1
+
+let g:better_whitespace_filetypes_blacklist=['<filetype1>', '<filetype2>', '<etc>', 'diff', 'gitcommit', 'unite', 'qf', 'help']
+nnoremap <silent> <leader>rs :StripWhitespace<CR>
+let g:rainbow_active = 1
+let g:rainbow_guifgs = ['RoyalBlue3', 'DarkOrange3', 'DarkOrchid3', 'FireBrick']
+let g:rainbow_ctermfgs = ['lightblue', 'lightgreen', 'yellow', 'red', 'magenta']

@@ -14,7 +14,7 @@
     "jedi.startupMessage": false,
     "jedi.markupKindPreferred": "plaintext",
     "jedi.trace.server": "off",
-    "jedi.jediSettings.autoImportModules": [],
+    "jedi.jediSettings.autoImportModules": ["numpy", "pandas"],
     "jedi.executable.command": "jedi-language-server",
     "jedi.executable.args": [],
     "jedi.completion.disableSnippets": false,
@@ -35,6 +35,7 @@
             "commmand": "flake8",
             "debounce": 100,
             "args": [
+                "--ignore E501",
                 "--format=%(row)d,%(col)d,%(code).1s,%(code)s: %(text)s",
                 "-"
             ],
