@@ -1,9 +1,9 @@
 plugged/*
 
-!plugged/vimspector
+!plugged/vimspector/
 plugged/vimspector/*
 
-!plugged/vimspector/configurations
+!plugged/vimspector/configurations/
 plugged/vimspector/configurations/*
 
 plugged/vimspector/configurations/linux/
