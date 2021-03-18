@@ -6,5 +6,5 @@ plugged/vimspector/*
 !plugged/vimspector/configurations/
 plugged/vimspector/configurations/*
 
-plugged/vimspector/configurations/linux/
+!plugged/vimspector/configurations/linux/
 
