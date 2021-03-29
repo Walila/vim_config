@@ -22,6 +22,7 @@ Plug 'vim-test/vim-test'
 
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'frazrepo/vim-rainbow'
+Plug 'easymotion/vim-easymotion'
 call plug#end()
 
 autocmd BufReadPre,BufNewFile * let b:did_vim_sass_colors = 1
@@ -150,11 +151,16 @@ inoremap <expr><CR> pumvisible() ? "\<C-Y>" : "\<CR>"
 
 nnoremap <silent> <C-s> :w<CR>
 inoremap <silent> <C-s> <ESC>:w<CR>a
+nnoremap <silent> <C-S-s> :wa<CR>
+inoremap <silent> <C-S-s> <ESC>:wa<CR>a
 
 " vimspector
 let g:vimspector_enable_mappings = 'VISUAL_STUDIO'
 
+
 nnoremap <leader>, :MaximizerToggle!<CR>
+nnoremap <leader>ve :VimspectorEval<Space>
+nnoremap <leader>vw :VimspectorWatch<Space>
 nnoremap <F4> :VimspectorReset<CR>
 tnoremap <s-Esc> <C-\><C-n>
 nnoremap <leader>atw :call AddToWatch()<CR>
@@ -220,3 +226,22 @@ nnoremap <silent> <leader>rs :StripWhitespace<CR>
 let g:rainbow_active = 1
 let g:rainbow_guifgs = ['RoyalBlue3', 'DarkOrange3', 'DarkOrchid3', 'FireBrick']
 let g:rainbow_ctermfgs = ['lightblue', 'lightgreen', 'yellow', 'red', 'magenta']
+
+let g:EasyMotion_smartcase = 1
+nmap <leader><leader>S <plug>(easymotion-s2)
+map / <Plug>(easymotion-sn)
+omap / <Plug>(easymotion-tn)
+map  n <Plug>(easymotion-next)
+map  N <Plug>(easymotion-prev)
+"unction! s:config_easyfuzzymotion(...) abort
+    "return extend(copy({
+    "\   'converters': [incsearch#config#fuzzyword#converter()],
+    "\   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
+    "\   'keymap': {"\<CR>": '<Over>(easymotion)'},
+    "\   'is_expr': 0,
+    "\   'is_stay': 1
+    "\ }), get(a:, 1, {}))
+"endfunction
+
+"noremap <silent><expr> <Space>/ incsearch#go(<SID>config_easyfuzzymotion())
+
