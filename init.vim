@@ -40,8 +40,6 @@ set colorcolumn=80
 set updatetime=300
 
 syntax on
-" set term=screen-256color-s
-" colorscheme burnttoast256
 colorscheme gruvbox
 set background=dark
 
@@ -125,6 +123,7 @@ let NERDTreeIfnore=['\.pyc','\~$','\.swp']
 let NERDTreeShowHidden=1
 
 nmap <leader>rr <Plug>(coc-rename)
+nmap <leader>rf <Plug>(coc-refactor)
 "xmap <leader>m <Plug>(coc-format)
 "nmap <leader>m <Plug>(coc-format)
 xmap <leader>m <Plug>(coc-format-selected)
