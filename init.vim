@@ -25,8 +25,6 @@ Plug 'frazrepo/vim-rainbow'
 Plug 'easymotion/vim-easymotion'
 call plug#end()
 
-autocmd BufReadPre,BufNewFile * let b:did_vim_sass_colors = 1
-
 filetype plugin indent on
 
 
@@ -35,7 +33,7 @@ set hidden
 set noswapfile
 set nobackup
 set nowritebackup
-set colorcolumn=80
+"set colorcolumn=0
 
 set updatetime=300
 
@@ -172,7 +170,7 @@ au BufNewFile,BufRead *.py
     \ set tabstop=4 |
     \ set softtabstop=4 |
     \ set shiftwidth=4 |
-    \ set textwidth=79 |
+    "\ set textwidth=79 |
     \ set expandtab |
     \ set autoindent |
     \ set fileformat=unix |
@@ -217,6 +215,9 @@ nnoremap <silent> <leader>l :vertical resize -5<CR>
 "set statusline^=%{coc#status()}%{get(b:,'coc_current_function',''
 "nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
 
+" for plugin sass-colors
+autocmd BufReadPre,BufNewFile * let b:did_vim_sass_colors = 1
+
 let g:better_whitespace_enable=1
 let g:strip_whitespace_on_save=1
 
@@ -244,3 +245,8 @@ map  N <Plug>(easymotion-prev)
 
 "noremap <silent><expr> <Space>/ incsearch#go(<SID>config_easyfuzzymotion())
 
+augroup remember_folds
+    autocmd!
+    autocmd BufWinLeave *.py mkview
+    autocmd BufWinEnter *.py silent! loadview
+augroup END
