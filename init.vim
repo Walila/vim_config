@@ -16,7 +16,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'morhetz/gruvbox'
 
 Plug 'puremourning/vimspector'
-Plug 'szw/vim-maximizer'
+"Plug 'szw/vim-maximizer'
 Plug 'shmargum/vim-sass-colors'
 Plug 'vim-test/vim-test'
 
@@ -77,6 +77,7 @@ set cmdheight=2
 set laststatus=2
 
 nnoremap <silent> <leader>fh :nohl<CR>
+nnoremap <leader>v <C-v>
 
 set splitbelow
 set splitright
@@ -120,6 +121,10 @@ let NERDTreeWinSize=25
 let NERDTreeIfnore=['\.pyc','\~$','\.swp']
 let NERDTreeShowHidden=1
 
+let g:NERDCommentEmptyLines = 1
+let g:NERDCompactSexyComs = 1
+let g:NERDDefaultAlign = 'left'
+
 nmap <leader>rr <Plug>(coc-rename)
 nmap <leader>rf <Plug>(coc-refactor)
 "xmap <leader>m <Plug>(coc-format)
@@ -147,9 +152,22 @@ endfunction
 inoremap <expr><CR> pumvisible() ? "\<C-Y>" : "\<CR>"
 
 nnoremap <silent> <C-s> :w<CR>
-inoremap <silent> <C-s> <ESC>:w<CR>a
-nnoremap <silent> <C-S-s> :wa<CR>
-inoremap <silent> <C-S-s> <ESC>:wa<CR>a
+inoremap <silent> <C-s> <ESC>:w<CR>
+nnoremap <silent> <leader>sa :wa<CR>
+"nnoremap <silent> <C-S-s> :wa<CR>
+"inoremap <silent> <C-S-s> <ESC>:wa<CR>a
+
+nnoremap <leader>ps :Git push<CR>
+"inoremap <leader>ps <ESC>:Git push<CR>a
+nnoremap <leader>pl :Git pull<CR>
+"inoremap <leader>pl <ESC>:Git pull<CR>a
+nnoremap <leader>ft :Git fetch<CR>
+"inoremap <leader>ft <ESC>:Git fetch<CR>a
+nnoremap <leader>mt :Git commit -a -m ""<LEFT>
+"inoremap <leader>mt <ESC>:Git commit -a -m ""<LEFT>
+nnoremap <leader>di :Git diff<CR>
+"inoremap <leader>di <ESC>:Git diff<CR>
+
 
 " vimspector
 let g:vimspector_enable_mappings = 'VISUAL_STUDIO'
@@ -207,10 +225,10 @@ nmap <silent> <leader>ts :TestSuite<CR>
 nmap <silent> <leader>tl :TestLast<CR>
 nmap <silent> <leader>tv :TestVisit<CR>
 
-nnoremap <silent> <leader>j :res +5<CR>
-nnoremap <silent> <leader>k :res -5<CR>
-nnoremap <silent> <leader>h :vertical resize +5<CR>
-nnoremap <silent> <leader>l :vertical resize -5<CR>
+nnoremap <leader>j :res +5<CR>
+nnoremap <leader>k :res -5<CR>
+nnoremap <leader>h :vertical resize +5<CR>
+nnoremap <leader>l :vertical resize -5<CR>
 
 "set statusline^=%{coc#status()}%{get(b:,'coc_current_function',''
 "nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
@@ -221,7 +239,8 @@ autocmd BufReadPre,BufNewFile * let b:did_vim_sass_colors = 1
 let g:better_whitespace_enable=1
 let g:strip_whitespace_on_save=1
 
-let g:better_whitespace_filetypes_blacklist=['<filetype1>', '<filetype2>', '<etc>', 'diff', 'gitcommit', 'unite', 'qf', 'help']
+let g:better_whitespace_filetypes_blacklist=['<filetype1>', '<filetype2>', '<etc>', 'diff', 'gitcommit', 'unite', 'qf', 'help', 'markdown']
+autocmd FileType markdown DisableStripWhitespaceOnSave
 nnoremap <silent> <leader>rs :StripWhitespace<CR>
 let g:rainbow_active = 1
 let g:rainbow_guifgs = ['RoyalBlue3', 'DarkOrange3', 'DarkOrchid3', 'FireBrick']

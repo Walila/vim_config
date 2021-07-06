@@ -22,10 +22,19 @@
     "jedi.diagnostics.didOpen": true,
     "jedi.diagnostics.didChange": true,
     "jedi.diagnostics.didSave": true,
+    "jedi.hover.enable": true,
+    "jedi.hover.disable.keyword.all": false,
     "jedi.workspace.extraPaths": [],
+    "jedi.workspace.symbols.ignoreFolders": [
+        ".nox",
+        ".tox",
+        ".venv",
+        "__pycache__",
+        "venv"
+    ],
     "diagnostic-languageserver.mergeConfig": true,
     "diagnostic-languageserver.filetypes": {
-          "python": "flake8",
+          "python": "pylint",
           "vim": "vint",
           "sh": "shellcheck",
           "yaml": "yamllint"
@@ -142,12 +151,14 @@
             ]
         },
         "yamllint": {
+            "command": "yamllint",
             "args": [
+                "-d",
+                "\"{extends: relaxed, rules:{line-length: disable}}\"",
                 "-f",
                 "parsable",
                 "-"
             ],
-            "command": "yamllint",
             "debounce": 100,
             "formatLines": 1,
             "formatPattern": [
