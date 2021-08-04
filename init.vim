@@ -23,6 +23,7 @@ Plug 'vim-test/vim-test'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'frazrepo/vim-rainbow'
 Plug 'easymotion/vim-easymotion'
+Plug 'djoshea/vim-autoread'
 call plug#end()
 
 filetype plugin indent on
@@ -151,9 +152,9 @@ function! s:check_back_space() abort
 endfunction
 inoremap <expr><CR> pumvisible() ? "\<C-Y>" : "\<CR>"
 
-nnoremap <silent> <C-s> :w<CR>
-inoremap <silent> <C-s> <ESC>:w<CR>
-nnoremap <silent> <leader>sa :wa<CR>
+nnoremap <C-s> :w<CR>
+inoremap <C-s> <ESC>:w<CR>
+nnoremap <leader>sa :wa<CR>
 "nnoremap <silent> <C-S-s> :wa<CR>
 "inoremap <silent> <C-S-s> <ESC>:wa<CR>a
 
@@ -163,7 +164,7 @@ nnoremap <leader>pl :Git pull<CR>
 "inoremap <leader>pl <ESC>:Git pull<CR>a
 nnoremap <leader>ft :Git fetch<CR>
 "inoremap <leader>ft <ESC>:Git fetch<CR>a
-nnoremap <leader>mt :Git commit -a -m ""<LEFT>
+nnoremap <leader>mt :wa<CR>:Git commit -a -m ""<LEFT>
 "inoremap <leader>mt <ESC>:Git commit -a -m ""<LEFT>
 nnoremap <leader>di :Git diff<CR>
 "inoremap <leader>di <ESC>:Git diff<CR>
