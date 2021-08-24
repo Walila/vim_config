@@ -1,5 +1,4 @@
 
-"let mapleader = "z"
 let mapleader = "\<Space>"
 
 
@@ -95,6 +94,9 @@ nmap <silent> <leader>c :tabclose<CR>
 
 vnoremap < <gv
 vnoremap > >gv
+
+nnoremap J mzJ`z
+nnoremap Y y$
 
 nnoremap <silent> <leader>so :source ~/.config/nvim/init.vim<CR>
 
