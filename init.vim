@@ -23,6 +23,9 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'frazrepo/vim-rainbow'
 Plug 'easymotion/vim-easymotion'
 Plug 'djoshea/vim-autoread'
+
+Plug 'OmniSharp/omnisharp-vim'
+Plug 'dense-analysis/ale'
 call plug#end()
 
 filetype plugin indent on
@@ -196,7 +199,7 @@ au BufNewFile,BufRead *.py
     \ set autoindent |
     \ set fileformat=unix |
 
-au BufNewFile,BufRead *.js,*.html,*.css,*.yaml
+au BufNewFile,BufRead *.js,*.html,*.css,*.yaml,*.yml
     \ set tabstop=2 |
     \ set softtabstop=2 |
     \ set shiftwidth=2 |
@@ -272,3 +275,18 @@ augroup remember_folds
     autocmd BufWinLeave *.py mkview
     autocmd BufWinEnter *.py silent! loadview
 augroup END
+
+let g:ale_completion_enabled=0
+let g:ale_linters = {
+     \ 'cs': ['omnisharp', 'mcs']
+     \}
+
+let g:OmniSharp_start_server = 1
+let g:OmniSharp_loglevel = 'info'
+let g:OmniSharp_server_display_loading = 1
+let g:OmniSharp_selector_ui = 'fzf'
+let g:OmniSharp_highlight_types = 3
+let g:OmniSharp_server_use_mono = 0
+let g:omnicomplete_fetch_full_documentation = 1
+let g:OmniSharp_popup = 1
+let g:OmniSharp_translate_cygwin_wsl = 1

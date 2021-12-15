@@ -1,4 +1,6 @@
 {
+    "omnisharp.trace.server": "information",
+    "omnisharp.debug.server": true,
     "languageserver": {
         "dockerfile":{
             "command": "docker-langserver",
