@@ -34,6 +34,7 @@
         "__pycache__",
         "venv"
     ],
+    "diagnostic.displayByAle": true,
     "diagnostic-languageserver.mergeConfig": true,
     "diagnostic-languageserver.filetypes": {
           "python": "pylint",

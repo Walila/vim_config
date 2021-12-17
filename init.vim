@@ -26,12 +26,13 @@ Plug 'djoshea/vim-autoread'
 
 Plug 'OmniSharp/omnisharp-vim'
 Plug 'dense-analysis/ale'
+Plug 'sheerun/vim-polyglot'
 call plug#end()
 
 filetype plugin indent on
 
 
-" set nocompatible
+set nocompatible
 set hidden
 set noswapfile
 set nobackup
@@ -278,7 +279,8 @@ augroup END
 
 let g:ale_completion_enabled=0
 let g:ale_linters = {
-     \ 'cs': ['omnisharp', 'mcs']
+     \ 'cs': ['omnisharp', 'csc'],
+     \ 'python': ['flake8']
      \}
 
 let g:OmniSharp_start_server = 1
@@ -290,3 +292,9 @@ let g:OmniSharp_server_use_mono = 0
 let g:omnicomplete_fetch_full_documentation = 1
 let g:OmniSharp_popup = 1
 let g:OmniSharp_translate_cygwin_wsl = 1
+
+"let g:polyglot_disabled = ['markdown']
+let g:ale_disable_lsp = 1
+set omnifunc=ale#completion#OmniFunc
+let g:ale_completion_autoimport = 1
+let g:ale_completion_enabled = 1
