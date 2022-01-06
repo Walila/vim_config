@@ -1,4 +1,5 @@
 {
+    "omnisharp.version": "v1.37.6",
     "omnisharp.trace.server": "information",
     "omnisharp.debug.server": true,
     "languageserver": {

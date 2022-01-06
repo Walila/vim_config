@@ -143,6 +143,13 @@ nmap <leader>gy <Plug>(coc-type-definition)
 nmap <leader>gi <Plug>(coc-implementation)
 nmap <leader>gr <Plug>(coc-references)
 xmap <leader>a <Plug>(coc-codeaction-selected)
+
+autocmd FileType cs nmap <leader>gd :OmniSharpGotoDefinition<CR>
+autocmd FileType cs nmap <leader>gi :OmniSharpFindImplementations<CR>
+autocmd FileType cs nmap <leader>rr :OmniSharpRename<CR>
+autocmd FileType cs nmap <leader>m :OmniSharpCodeFormat<CR>
+autocmd FileType cs nmap <leader>gr :OmniSharpFindUsages<CR>
+autocmd FileType cs nmap <leader>rg :OmniSharpFixUsings<CR>
 "nmap <leader>a <Plug>(coc-codeaction-selected)
 "nmap <leader>ac  <Plug>(coc-codeaction)
 "nmap <leader>qf  <Plug>(coc-fix-current)
@@ -298,3 +305,5 @@ let g:ale_disable_lsp = 1
 set omnifunc=ale#completion#OmniFunc
 let g:ale_completion_autoimport = 1
 let g:ale_completion_enabled = 1
+let g:airline#extensions#ale#enabled = 1
+
