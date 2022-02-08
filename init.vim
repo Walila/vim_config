@@ -101,8 +101,30 @@ vnoremap > >gv
 
 nnoremap J mzJ`z
 nnoremap Y y$
+"nnoremap n nzzzv
+"nnoremap N Nzzzv
+nnoremap * *zzzv
+nnoremap # #zzzv
 
-nnoremap <silent> <leader>so :source ~/.config/nvim/init.vim<CR>
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+
+inoremap , ,<C-g>u
+inoremap . .<C-g>u
+inoremap ! !<C-g>u
+inoremap ? ?<C-g>u
+inoremap : :<C-g>u
+
+nmap hh ^
+nmap ll $
+vmap " <Esc>bi"<Esc>wwi"
+vmap ' <Esc>bi'<Esc>wwi'
+vmap ( <Esc>bi(<Esc>wwi)
+vmap [ <Esc>bi[<Esc>wwi]
+vmap { <Esc>bi{<Esc>wwi}
+vmap < <Esc>bi<<Esc>wwi>
+
+nnoremap <leader>so :source ~/.config/nvim/init.vim<CR>
 
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
@@ -143,6 +165,7 @@ nmap <leader>gy <Plug>(coc-type-definition)
 nmap <leader>gi <Plug>(coc-implementation)
 nmap <leader>gr <Plug>(coc-references)
 xmap <leader>a <Plug>(coc-codeaction-selected)
+nmap <leader>b <C-o>
 
 autocmd FileType cs nmap <leader>gd :OmniSharpGotoDefinition<CR>
 autocmd FileType cs nmap <leader>gi :OmniSharpFindImplementations<CR>
