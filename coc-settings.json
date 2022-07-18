@@ -1,7 +1,4 @@
 {
-    "omnisharp.version": "v1.37.6",
-    "omnisharp.trace.server": "information",
-    "omnisharp.debug.server": true,
     "languageserver": {
         "dockerfile":{
             "command": "docker-langserver",
@@ -36,6 +33,11 @@
         "venv"
     ],
     "diagnostic.displayByAle": true,
+    "diagnostic.enableMessage": "jump",
+    "diagnostic.messageTarget": "float",
+    "diagnostic.virtualText": true,
+    "codeLens.enable": true,
+
     "diagnostic-languageserver.mergeConfig": true,
     "diagnostic-languageserver.filetypes": {
           "python": "pylint",

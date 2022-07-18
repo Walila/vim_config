@@ -11,11 +11,12 @@ Plug 'junegunn/fzf.vim'
 Plug 'mileszs/ack.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
+"Plug 'Xuyuanp/nerdtree-git-plugin'
+
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'morhetz/gruvbox'
 
 Plug 'puremourning/vimspector'
-"Plug 'szw/vim-maximizer'
 Plug 'shmargum/vim-sass-colors'
 Plug 'vim-test/vim-test'
 
@@ -25,12 +26,11 @@ Plug 'easymotion/vim-easymotion'
 Plug 'djoshea/vim-autoread'
 
 Plug 'OmniSharp/omnisharp-vim'
+Plug 'junegunn/vim-easy-align'
 Plug 'dense-analysis/ale'
-Plug 'sheerun/vim-polyglot'
 call plug#end()
 
 filetype plugin indent on
-
 
 set nocompatible
 set hidden
@@ -40,6 +40,7 @@ set nowritebackup
 "set colorcolumn=0
 
 set updatetime=300
+set autoread
 
 syntax on
 colorscheme gruvbox
@@ -96,18 +97,20 @@ nmap <silent> <leader>p :bp<CR>
 nmap <silent> <leader>w :bw<CR>
 nmap <silent> <leader>c :tabclose<CR>
 
-vnoremap < <gv
-vnoremap > >gv
+"vnoremap << <gv
+"vnoremap >> >gv
 
 nnoremap J mzJ`z
 nnoremap Y y$
-"nnoremap n nzzzv
-"nnoremap N Nzzzv
+nmap n nzzzv
+nmap N Nzzzv
 nnoremap * *zzzv
 nnoremap # #zzzv
 
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
+vnoremap H <gv
+vnoremap L >gv
 
 inoremap , ,<C-g>u
 inoremap . .<C-g>u
@@ -115,14 +118,37 @@ inoremap ! !<C-g>u
 inoremap ? ?<C-g>u
 inoremap : :<C-g>u
 
-nmap hh ^
-nmap ll $
-vmap " <Esc>bi"<Esc>wwi"
-vmap ' <Esc>bi'<Esc>wwi'
-vmap ( <Esc>bi(<Esc>wwi)
-vmap [ <Esc>bi[<Esc>wwi]
-vmap { <Esc>bi{<Esc>wwi}
-vmap < <Esc>bi<<Esc>wwi>
+
+"function! MarkCodeBlock()
+"    " Add Markdown code-block delimiters to begin and end of current visual group.
+"    execute "normal! `<O```\<esc>yy`>p"
+"endfunction
+"
+"xnoremap <leader>q :call MarkCodeBlock()<CR>
+"
+"function! FindAndReplaceAll(from, to)
+"    echo a:from
+"    exe %s/' . a:from . '/' . a:to . '/gc''
+"endfunction
+
+
+
+
+nmap <S-h> ^
+nmap <S-l> $
+"vmap " <Esc>bi"<Esc>wwi"
+"vmap ' <Esc>bi'<Esc>wwi'
+"vmap ( <Esc>bi(<Esc>wwi)
+"vmap [ <Esc>bi[<Esc>wwi]
+"vmap { <Esc>bi{<Esc>wwi}
+"vmap < <Esc>bi<<Esc>wwi>
+
+vmap " di"<Esc>pa"<Esc>va"
+vmap ' di'<Esc>pa'<Esc>va'
+vmap ( di(<Esc>pa)<Esc>va)
+vmap [ di[<Esc>pa]<Esc>va]
+vmap { di{<Esc>pa}<Esc>va}
+vmap < di<<Esc>pa><Esc>va>
 
 nnoremap <leader>so :source ~/.config/nvim/init.vim<CR>
 
@@ -154,6 +180,18 @@ let g:NERDCommentEmptyLines = 1
 let g:NERDCompactSexyComs = 1
 let g:NERDDefaultAlign = 'left'
 
+"let g:NERDTreeGitStatusIndicatorMapCustom = {
+"\ "Modified"  : "✹",
+"\ "Staged"    : "✚",
+"\ "Untracked" : "✭",
+"\ "Renamed"   : "➜",
+"\ "Unmerged"  : "═",
+"\ "Deleted"   : "✖",
+"\ "Dirty"     : "✗",
+"\ "Clean"     : "✔︎",
+"\ "Unknown"   : "?"
+"\ }
+
 nmap <leader>rr <Plug>(coc-rename)
 nmap <leader>rf <Plug>(coc-refactor)
 "xmap <leader>m <Plug>(coc-format)
@@ -167,12 +205,27 @@ nmap <leader>gr <Plug>(coc-references)
 xmap <leader>a <Plug>(coc-codeaction-selected)
 nmap <leader>b <C-o>
 
-autocmd FileType cs nmap <leader>gd :OmniSharpGotoDefinition<CR>
-autocmd FileType cs nmap <leader>gi :OmniSharpFindImplementations<CR>
-autocmd FileType cs nmap <leader>rr :OmniSharpRename<CR>
-autocmd FileType cs nmap <leader>m :OmniSharpCodeFormat<CR>
-autocmd FileType cs nmap <leader>gr :OmniSharpFindUsages<CR>
-autocmd FileType cs nmap <leader>rg :OmniSharpFixUsings<CR>
+"autocmd FileType cs nmap <leader>gd :OmniSharpGotoDefinition<CR>
+"autocmd FileType cs nmap <leader>gi :OmniSharpFindImplementations<CR>
+"autocmd FileType cs nmap <leader>rr :OmniSharpRename<CR>
+"autocmd FileType cs nmap <leader>m :OmniSharpCodeFormat<CR>
+"autocmd FileType cs nmap <leader>gr :OmniSharpFindUsages<CR>
+"autocmd FileType cs nmap <leader>rg :OmniSharpFixUsings<CR>
+
+
+autocmd FileType cs
+    \ nmap <leader>gd :OmniSharpGotoDefinition<CR> |
+    \ nmap <leader>gi :OmniSharpFindImplementations<CR> |
+    \ nmap <leader>rr :OmniSharpRename<CR> |
+    \ nmap <leader>m :OmniSharpCodeFormat<CR> |
+    \ nmap <leader>gr :OmniSharpFindUsages<CR> |
+    \ nmap <leader>rg :OmniSharpFixUsings<CR> |
+    \ nmap <leader>vd :OmniSharpPreviewDefinition<CR> |
+    \ nmap <leader>vi :OmniSharpPreviewImplementation<CR> |
+    \ nmap <leader>vr :OmniSharpGlobalCodeCheck<CR> |
+
+"autocmd FileType cs nmap <leader>rg :OmniSharpFixUsings<CR>
+"autocmd FileType cs nmap <leader>rg :OmniSharpFixUsings<CR>
 "nmap <leader>a <Plug>(coc-codeaction-selected)
 "nmap <leader>ac  <Plug>(coc-codeaction)
 "nmap <leader>qf  <Plug>(coc-fix-current)
@@ -214,7 +267,7 @@ nnoremap <leader>, :MaximizerToggle!<CR>
 nnoremap <leader>ve :VimspectorEval<Space>
 nnoremap <leader>vw :VimspectorWatch<Space>
 nnoremap <F4> :VimspectorReset<CR>
-tnoremap <s-Esc> <C-\><C-n>
+"tnoremap <s-Esc> <C-\><C-n>
 nnoremap <leader>atw :call AddToWatch()<CR>
 func! AddToWatch()
     let word = expand("<cexpr>")
@@ -307,7 +360,6 @@ augroup remember_folds
     autocmd BufWinEnter *.py silent! loadview
 augroup END
 
-let g:ale_completion_enabled=0
 let g:ale_linters = {
      \ 'cs': ['omnisharp', 'csc'],
      \ 'python': ['flake8']
@@ -324,9 +376,15 @@ let g:OmniSharp_popup = 1
 let g:OmniSharp_translate_cygwin_wsl = 1
 
 "let g:polyglot_disabled = ['markdown']
-let g:ale_disable_lsp = 1
+"let g:ale_disable_lsp = 1
 set omnifunc=ale#completion#OmniFunc
-let g:ale_completion_autoimport = 1
-let g:ale_completion_enabled = 1
+"let g:ale_completion_autoimport = 1
+"let g:ale_completion_enabled = 1
 let g:airline#extensions#ale#enabled = 1
 
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
+
+"let g:coc_global_extentions=[ 'coc-OmniSharp' ]
+
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
