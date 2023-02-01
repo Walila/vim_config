@@ -11,7 +11,6 @@ Plug 'junegunn/fzf.vim'
 Plug 'mileszs/ack.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
-"Plug 'Xuyuanp/nerdtree-git-plugin'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'morhetz/gruvbox'
@@ -37,7 +36,6 @@ set hidden
 set noswapfile
 set nobackup
 set nowritebackup
-"set colorcolumn=0
 
 set updatetime=300
 set autoread
@@ -63,7 +61,7 @@ set confirm
 set nowrap
 set fo-=t
 set encoding=utf-8
-set scrolloff=8
+set scrolloff=12
 
 set guioptions-=r
 set guioptions-=L
@@ -92,20 +90,21 @@ nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
 "nnoremap <space> za
-nmap <silent> <leader>n :bn<CR>
-nmap <silent> <leader>p :bp<CR>
-nmap <silent> <leader>w :bw<CR>
-nmap <silent> <leader>c :tabclose<CR>
+"nmap <silent> <leader>n :bn<CR>
+"nmap <silent> <leader>p :bp<CR>
+"nmap <silent> <leader>w :bw<CR>
+"nmap <silent> <leader>c :tabclose<CR>
 
 "vnoremap << <gv
 "vnoremap >> >gv
+
 
 nnoremap J mzJ`z
 nnoremap Y y$
 nmap n nzzzv
 nmap N Nzzzv
-nnoremap * *zzzv
-nnoremap # #zzzv
+nmap * *zzzv
+nmap # #zzzv
 
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
@@ -134,6 +133,8 @@ inoremap : :<C-g>u
 
 
 
+"imap <S-h> <ESC>I
+"imap <S-l> <ESC>A
 nmap <S-h> ^
 nmap <S-l> $
 "vmap " <Esc>bi"<Esc>wwi"
@@ -203,7 +204,9 @@ nmap <leader>gy <Plug>(coc-type-definition)
 nmap <leader>gi <Plug>(coc-implementation)
 nmap <leader>gr <Plug>(coc-references)
 xmap <leader>a <Plug>(coc-codeaction-selected)
-nmap <leader>b <C-o>
+nmap <leader>gb <C-o>
+"nmap <leader>gn <Plug>(coc-diagnostic-next-error)
+"nmap <leader>b <C-o>
 
 "autocmd FileType cs nmap <leader>gd :OmniSharpGotoDefinition<CR>
 "autocmd FileType cs nmap <leader>gi :OmniSharpFindImplementations<CR>
@@ -223,6 +226,8 @@ autocmd FileType cs
     \ nmap <leader>vd :OmniSharpPreviewDefinition<CR> |
     \ nmap <leader>vi :OmniSharpPreviewImplementation<CR> |
     \ nmap <leader>vr :OmniSharpGlobalCodeCheck<CR> |
+    \ nmap <leader>sb :!exec dotnet build<CR> |
+    \ imap <leader>sb <ESC>:!exec dotnet build<CR> |
 
 "autocmd FileType cs nmap <leader>rg :OmniSharpFixUsings<CR>
 "autocmd FileType cs nmap <leader>rg :OmniSharpFixUsings<CR>
@@ -239,19 +244,29 @@ autocmd FileType cs
 inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 inoremap <silent><expr> <C-x><C-z> coc#pum#visible() ? coc#pum#stop() : "\<C-x>\<C-z>"
 " remap for complete to use tab and <cr>
+"inoremap <silent><expr> <TAB>
+"    \ coc#pum#visible() ? coc#pum#next(1):
+"    \ <SID>check_back_space() ? "\<Tab>" :
+"    \ coc#refresh()
+
+
 inoremap <silent><expr> <TAB>
     \ coc#pum#visible() ? coc#pum#next(1):
     \ <SID>check_back_space() ? "\<Tab>" :
     \ coc#refresh()
+
 inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 inoremap <silent><expr> <c-space> coc#refresh()
 function! s:check_back_space() abort
     let col = col('.') - 1
     return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
-
 hi CocSearch ctermfg=12 guifg=#18A3FF
 hi CocMenuSel ctermbg=109 guibg=#13354A
+
+"hi CocSearch ctermfg=12 guifg=#A69012
+"hi CocMenuSel ctermbg=109 guibg=#A69012
+
 
 nnoremap <C-s> :w<CR>
 inoremap <C-s> <ESC>:w<CR>
@@ -273,6 +288,7 @@ nnoremap <leader>di :Git diff<CR>
 
 " vimspector
 let g:vimspector_enable_mappings = 'VISUAL_STUDIO'
+let g:vimspector_base_dir = expand('$HOME/.config/nvim/plugged/vimspector')
 
 
 nnoremap <leader>, :MaximizerToggle!<CR>
@@ -288,14 +304,11 @@ endfunction
 
 au BufNewFile,BufRead *.py
     \ set tabstop=4 |
-    \ set softtabstop=4 |
-    \ set shiftwidth=4 |
-    "\ set textwidth=79 |
     \ set expandtab |
     \ set autoindent |
     \ set fileformat=unix |
 
-au BufNewFile,BufRead *.js,*.html,*.css,*.yaml,*.yml
+au BufNewFile,BufRead *.js,*.html,*.css,*.yaml,*.yml,*.json
     \ set tabstop=2 |
     \ set softtabstop=2 |
     \ set shiftwidth=2 |
@@ -326,6 +339,7 @@ nmap <silent> <leader>tf :TestFile<CR>
 nmap <silent> <leader>ts :TestSuite<CR>
 nmap <silent> <leader>tl :TestLast<CR>
 nmap <silent> <leader>tv :TestVisit<CR>
+nmap <leader>bb :!exec dotnet build<CR>
 
 nnoremap <leader>j :res +5<CR>
 nnoremap <leader>k :res -5<CR>
